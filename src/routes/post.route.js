@@ -36,9 +36,11 @@ const storage = new GridFsStorage(
 
 const upload = multer({ storage })
 
-
 router.post('/create', passport.authenticate('jwt', { session: false }), post.create)
 router.get('/allposts', passport.authenticate('jwt', { session: false }), post.allposts)
+router.get('/getposts/:id', passport.authenticate('jwt', { session: false }), post.getpostsbyID)
+
+
 
 
 

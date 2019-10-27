@@ -15,3 +15,8 @@ exports.allposts = async (req, res)=>{
         res.json(posts)
     }
 }
+
+exports.getpostsbyID= async (req, res)=>{ 
+   let posts = await Post.find({author: req.params.id})
+   res.json(posts)
+}

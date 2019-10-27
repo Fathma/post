@@ -1,9 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const keys = require('./config/keys')
+const passport = require('passport')
 const app = express()
 
+const keys = require('./config/keys')
 const postRoute = require('./src/routes/post.route')
 
 // Map global promise
@@ -17,6 +18,8 @@ mongoose.connect( keys.database.mongoURI, err => {
 
 var con = mongoose.connection;
 
+// Passport config
+require("./src/helpers/passport")(passport);
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -5,9 +5,12 @@ const multer = require('multer')
 const GridFsStorage = require('multer-gridfs-storage')
 const router = express.Router()
 
-const user = require('../controllers/post.controller')
+const post = require('../controllers/post.controller')
 const validate = require('../helpers/validations')
 const keys = require('../../config/keys')
+const passport = require('passport')
+
+
 
 var filename;
 
@@ -34,6 +37,9 @@ const storage = new GridFsStorage(
 const upload = multer({ storage })
 
 
-// router.post('/register', validate.UserRegistration, user.register)
+router.post('/create', passport.authenticate('jwt', { session: false }), post.create)
+router.get('/allposts', passport.authenticate('jwt', { session: false }), post.allposts)
+
+
 
 module.exports = router

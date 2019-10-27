@@ -1,6 +1,5 @@
 const Joi = require('joi')
 
-
 const UserReg = Joi.object().keys({
     name: Joi.string().trim().required(),
     email: Joi.string().trim().required().email(),
@@ -17,7 +16,6 @@ const UserLog = Joi.object().keys({
 
 
 exports.UserRegistration = (req, res, next)=>{
-
     Joi.validate(req.body, UserReg, (err, result)=>{
         if(err){
             res.json({err})

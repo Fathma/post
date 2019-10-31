@@ -25,12 +25,12 @@ require("./src/helpers/passport")(passport);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/post', postRoute)
+app.use('/post', passport.authenticate('jwt', { session: false }), postRoute)
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-server.listen(process.env.PORT || 5000);
+server.listen(process.env.PORT || 80);
 
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });

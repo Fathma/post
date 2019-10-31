@@ -12,11 +12,12 @@ const PostSchema = new Schema({
     comments: [
         {
             user: { type: Schema.Types.ObjectId, ref: 'Author' },
-            comment: { type: String }
+            comment: { type: String },
+            date: { type: Date, default: Date.now }
         }
     ],
     image: { type: String},
-    date: { type: String, default:Date.now }
+    date: { type: Date, default:Date.now }
 })
 
 module.exports = mongoose.model('Post', PostSchema, 'posts')

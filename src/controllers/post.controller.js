@@ -10,6 +10,7 @@ exports.create= (req, res)=>{
 }
 
 exports.allposts = async (req, res)=>{
+    console.log("sdfsd")
     let posts =await Post.find()
     if(posts){
         res.json(posts)

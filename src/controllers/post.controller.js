@@ -10,9 +10,10 @@ exports.create= (req, res)=>{
 }
 
 exports.allposts = async (req, res)=>{
-    console.log("sdfsd")
-    let posts =await Post.find()
+    
+    let posts =await Post.find().populate('author')
     if(posts){
+        console.log(posts)
         res.json(posts)
     }
 }
@@ -24,16 +25,21 @@ exports.getpostsbyID= async (req, res)=>{
 
 exports.addcomment = async (req,res)=>{
     try{
+        
         let post = await Post.findOne({ _id: req.params.post_id})
+        
         let cmnt = {
             comment: req.body.comment,
             user: req.user._id
         }
+        
         post.comments.push(cmnt)
-    
+       
         await new Post(post).save()
+       
         res.json(post)
     }catch(err){
+        
         res.json(err)
     }
 }
@@ -51,5 +57,15 @@ exports.addlike = async (req, res)=>{
     let post = await Post.findOne({_id: req.params.post_id})
     post.likes.push({user: req.user._id})
     await new Post(post).save()
+    res.json(post)
+}
+
+exports.postdetails = async (req, res)=>{
+    
+    let post = await Post.findOne({_id: req.params.post_id})
+    .populate('likes.user')
+    .populate('comments.user')
+    .populate('author')
+
     res.json(post)
 }

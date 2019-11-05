@@ -39,9 +39,10 @@ const upload = multer({ storage })
 router.post('/create',  post.create)
 router.get('/allposts',  post.allposts)
 router.get('/getposts/:id',  post.getpostsbyID)
-router.post('/addcomment/:post_id',  post.addcomment)
+router.post('/addcomment',  post.addcomment)
 router.get('/deletecomment/:cmnt_id/:post_id',  post.deletecomment)
 router.get('/addlike/:post_id',  post.addlike)
+router.get('/postdetails/:post_id', post.postdetails)
 
 
 

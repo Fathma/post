@@ -24,6 +24,9 @@ exports.getpostsbyID= async (req, res)=>{
 }
 
 exports.addcomment = async (req,res)=>{
+    console.log(req.body.comment)
+    
+
     try{
         
         let post = await Post.findOne({ _id: req.params.post_id})
@@ -32,14 +35,11 @@ exports.addcomment = async (req,res)=>{
             comment: req.body.comment,
             user: req.user._id
         }
-        
         post.comments.push(cmnt)
-       
         await new Post(post).save()
-       
         res.json(post)
     }catch(err){
-        
+        console.log(err)
         res.json(err)
     }
 }
@@ -61,7 +61,7 @@ exports.addlike = async (req, res)=>{
 }
 
 exports.postdetails = async (req, res)=>{
-    
+    console.log(req.user)
     let post = await Post.findOne({_id: req.params.post_id})
     .populate('likes.user')
     .populate('comments.user')

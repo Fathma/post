@@ -24,11 +24,7 @@ exports.getpostsbyID= async (req, res)=>{
 }
 
 exports.addcomment = async (req,res)=>{
-    console.log(req.body.comment)
-    
-
-    try{
-        
+    try{ 
         let post = await Post.findOne({ _id: req.params.post_id})
         
         let cmnt = {
@@ -38,8 +34,8 @@ exports.addcomment = async (req,res)=>{
         post.comments.push(cmnt)
         await new Post(post).save()
         res.json(post)
+        
     }catch(err){
-        console.log(err)
         res.json(err)
     }
 }

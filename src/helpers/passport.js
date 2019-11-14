@@ -14,14 +14,13 @@ const opts = {
 
 
 module.exports = (passport)=> {
-  console.log(opts.jwtFromRequest)
+ 
     passport.use( new JwtStrategy( opts, ( payload, done ) => {
         Author.findOne({ _id: payload.user._id }, ( err, user)=> {
             if (err) {
                 return done( err, false )
             }
             if (user) {
-                console.log(user)
                 return done( null, user )
             } else {
                

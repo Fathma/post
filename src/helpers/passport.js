@@ -14,7 +14,6 @@ const opts = {
 
 
 module.exports = (passport)=> {
- 
     passport.use( new JwtStrategy( opts, ( payload, done ) => {
         Author.findOne({ _id: payload.user._id }, ( err, user)=> {
             if (err) {

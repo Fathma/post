@@ -10,10 +10,8 @@ exports.create= (req, res)=>{
 }
 
 exports.allposts = async (req, res)=>{
-    
     let posts =await Post.find().populate('author')
     if(posts){
-        console.log(posts)
         res.json(posts)
     }
 }
@@ -34,7 +32,7 @@ exports.addcomment = async (req,res)=>{
         post.comments.push(cmnt)
         await new Post(post).save()
         res.json(post)
-        
+
     }catch(err){
         res.json(err)
     }
